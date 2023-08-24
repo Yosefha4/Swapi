@@ -27,3 +27,5 @@ mongoose.connect(process.env.MONGO_URL ,()=>{
 app.listen(port, () => {
   console.log(`Auth Service listening on port ${port}`)
 })
+
+export {app} ;
