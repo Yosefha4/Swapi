@@ -1,0 +1,28 @@
+version: '3'
+services:
+  flask-app:
+    build:
+     context: .
+     dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+     - .:/app
+    environment:
+      MONGO_URI: "mongodb+srv://yosefha4:yosefha4@cluster0.k4kiax3.mongodb.net/?retryWrites=true&w=majority"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: "mongo:latest"
+    container_name: host-my-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: yosefha4
+      MONGO_INITDB_ROOT_PASSWORD: yosefha4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
