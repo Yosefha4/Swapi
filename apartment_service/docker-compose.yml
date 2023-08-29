@@ -1,0 +1,36 @@
+version: '3'
+services:
+  apartment_flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    volumes:
+      - .:/app
+    environment:
+      POSTGRES_HOST: "postgres"  # This is the service name of the PostgreSQL container
+      POSTGRES_PORT: 5432        # Default PostgreSQL port
+      POSTGRES_DB: "flask_db"    # Your PostgreSQL database name
+      POSTGRES_USER: "postgres"  # PostgreSQL username
+      POSTGRES_PASSWORD: "yosefha4"  # PostgreSQL password
+    depends_on:
+      - postgres
+
+  postgres:
+    image: "postgres:latest"
+    restart: always
+    container_name: host-my-postgres
+    environment:
+      POSTGRES_DB: "flask_db"    # Your PostgreSQL database name
+      POSTGRES_USER: "postgres"  # PostgreSQL username
+      POSTGRES_PASSWORD: "yosefha4"  # PostgreSQL password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Mount the SQL script
+
+
+volumes:
+  postgres_data: {}
