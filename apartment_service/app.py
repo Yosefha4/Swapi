@@ -4,7 +4,7 @@ from flask import Flask,redirect,request,url_for,jsonify,make_response
 app = Flask(__name__)
 
 def db_connection():
-    conn = psycopg2.connect(database="flask_db",host="postgres",user="postgres",password="yosefha4",port="5432")
+    conn = psycopg2.connect(database="flask_db",host="postgres",user="postgres",password="***",port="5432")
     return conn
 
 @app.route("/")
