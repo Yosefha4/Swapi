@@ -2,12 +2,12 @@
 import { useState } from "react";
 
 import "./App.css";
-import Auth from "./components/Auth";
-import Navbar from "./components/Navbar";
+import Auth from "./components/Auth/Auth";
+import Navbar from "./components/Navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import RealEstate from "./components/RealEstate";
-import Vehicles from "./components/Vehicles";
+import RealEstate from "./components/RealEstate/RealEstate";
+import Vehicles from "./components/Vehicles/Vehicles";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,7 +20,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/realEstate" element={<RealEstate />} />
         <Route path="/vehicles" element={<Vehicles />} />
-        <Route path="/contact" element={<Auth/>} />
+        <Route path="/auth" element={<Auth/>} />
       </Routes>
       {/* <Auth/> */}
     </div>

@@ -18,14 +18,15 @@ const Navbar = () => {
         <span></span>
       </div>
       <ul className={menuOpen ? "open" : ""}>
+      
         <li>
-          <NavLink to="/realEstate">Real Estate</NavLink>
+          <NavLink to="/vehicles">רכב</NavLink>
         </li>
         <li>
-          <NavLink to="/vehicles">Vehicles</NavLink>
+          <NavLink to="/realEstate">נדל"ן</NavLink>
         </li>
         <li>
-          <NavLink to="/contact">contact</NavLink>
+          <NavLink to="/auth">איזור אישי</NavLink>
         </li>
       </ul>
     </nav>

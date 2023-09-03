@@ -1,0 +1,78 @@
+.container{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+    margin: 25px;
+    /* background-color: whitesmoke; */
+    height: 100vh;
+
+}
+.form-cont{
+    margin-top: 24px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 16px;
+    width: 450px;
+    height: max-content;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+/* padding: 48px; */
+
+    
+}
+.title{
+    font-size: 24px;
+    font-weight: bold;
+}
+.input-item{
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    margin: 15px 0;
+    align-items: center;
+}
+
+.inputBox{
+    height: 30px;
+    width: 70%;
+    padding: 8px;
+    text-align: right;
+}
+
+.authButton{
+    width: 70%;
+    height: 30px;
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.authButton:hover{
+    background-color: white;
+    border: 2px solid black;
+}
+
+.secBtn{
+    font-size: 14px;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+}
+.secBtn:hover{
+   color: blue;
+}
+
+@media(max-width:480px){
+    .form-cont{
+        width: calc(100% - 30px);
+        
+    }
+    .input-item{
+        flex-direction: column-reverse;
+    }
+}

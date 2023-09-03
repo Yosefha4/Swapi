@@ -1,0 +1,43 @@
+.main-container {
+  display: flex;
+  margin: 1rem;
+  flex: 1;
+ gap:10px;
+ height: 100vh;
+}
+
+.adv-container {
+  flex: 1;
+  background-color: aqua;
+  text-align: center;
+  border-radius: 5px;
+
+}
+.middle-container {
+  flex: 4;
+  background-color: rebeccapurple;
+  text-align: center;
+  
+}
+.search{
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+}
+.recommended{
+    height: 150px;
+    background-color: yellowgreen;
+    border: 1px solid black;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.items{
+    background-color: lightcoral;
+    
+}
+
+@media (max-width: 480px) {
+    .main-container{
+        flex-direction: column;
+    }
+}
