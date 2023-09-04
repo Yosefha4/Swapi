@@ -1,17 +1,21 @@
 # routes.py
 from flask import Blueprint
 from user.models import User
+# from flask_cors import cross_origin
 
 user_bp = Blueprint('user', __name__)
 
+# @cross_origin
 @user_bp.route("/signup", methods=['POST'])
 def signup():
     return User().signup()
 
+# @cross_origin
 @user_bp.route("/signout")
 def signout():
     return User().signout()
 
+# @cross_origin
 @user_bp.route("/login")
 def login():
     return User().login()
