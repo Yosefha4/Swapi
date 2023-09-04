@@ -16,7 +16,7 @@ def signout():
     return User().signout()
 
 # @cross_origin
-@user_bp.route("/login")
+@user_bp.route("/login" , methods=['POST'])
 def login():
     return User().login()
 

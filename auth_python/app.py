@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+
 
 # from user.models import User
 import pymongo
@@ -8,6 +10,9 @@ import pymongo
 
 app = Flask(__name__)
 app.secret_key = b'\xf23\x80\xce%\x10\x9b\xa3\xd0mtn\xe3+\xa8\xf7'
+
+jwt = JWTManager(app)
+
 
 CORS(app)
 

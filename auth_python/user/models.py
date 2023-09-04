@@ -1,4 +1,5 @@
 from flask import Flask,jsonify, redirect,request,session
+from flask_jwt_extended import create_access_token
 import uuid
 import bcrypt
 # from app import db
@@ -54,7 +55,9 @@ class User:
             stored_password = user["password"]
             login_password = user_data.get("password")
             if bcrypt.checkpw(login_password.encode('utf-8'), stored_password.encode('utf-8')):
-                return {"message": "Login successful"}, 200
+                access_token = create_access_token(identity=user["email"])
+                return jsonify({"access_token": access_token}), 200
+                # return {"message": "Login successful"}, 200
             else:
                 return {"message": "Invalid password"}, 401
 
