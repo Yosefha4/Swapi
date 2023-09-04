@@ -1,9 +1,11 @@
+import Footer from "./Footer/Footer"
 import Hero from "./Hero/Hero"
 
 const Home = () => {
   return (
-    <div>
+    <div >
       <Hero />
+      <Footer />
     </div>
   )
 }

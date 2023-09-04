@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import RealEstate from "./components/RealEstate/RealEstate";
 import Vehicles from "./components/Vehicles/Vehicles";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,6 +23,7 @@ function App() {
         <Route path="/vehicles" element={<Vehicles />} />
         <Route path="/auth" element={<Auth/>} />
       </Routes>
+      {/* <Footer /> */}
       {/* <Auth/> */}
     </div>
   );
