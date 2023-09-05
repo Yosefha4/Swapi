@@ -1,10 +1,13 @@
 import psycopg2
-from flask import Flask,redirect,request,url_for,jsonify,make_response
+from flask import Flask,redirect,request,url_for,jsonify,make_response,Response
+from flask_cors import CORS
 
 app = Flask(__name__)
 
+CORS(app)
+
 def db_connection():
-    conn = psycopg2.connect(database="flask_db",host="postgres",user="postgres",password="***",port="5432")
+    conn = psycopg2.connect(database="flask_db",host="postgres",user="postgres",password="yosefha4",port="5432")
     return conn
 
 @app.route("/")
@@ -15,7 +18,17 @@ def index():
     data = cur.fetchall()
     cur.close()
     conn.close()
-    return data
+
+     # Ensure the data is encoded as UTF-8
+    data_encoded = []
+    for row in data:
+        row_encoded = [str(cell, 'utf-8') if isinstance(cell, bytes) else cell for cell in row]
+        data_encoded.append(row_encoded)
+  
+
+    response = jsonify(data_encoded)
+    response.headers["Content-Type"] = "application/json; charset=utf-8"
+    return response
 
 @app.route("/create", methods=['POST'])
 def create():

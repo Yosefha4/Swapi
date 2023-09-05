@@ -1,13 +1,13 @@
-.container{
-  display: flex;
+.main-container {
   height: 100vh;
+  /* margin-top: 58px; */
+  display: flex;
   flex-direction: column;
-  /* background-color: black; */
- 
-
+  align-items: center;
+  /* background-color: blue; */
 }
 
-.adv-section{
+.adv-section {
   height: 200px;
   width: 90%;
   border-radius: 5px;
@@ -15,100 +15,96 @@
   background-color: lightsalmon;
 }
 
-.hero-section{
-    display: flex;
-    width: 90%;
+.hero-section {
+  display: flex;
+  width: 90%;
 
-    margin: 1rem;
-    height: 350px;
-    padding: 0.25rem;
-    /* margin: 2rem; */
-
+  margin: 1rem;
+  height: 350px;
+  padding: 0.25rem;
+  /* margin: 2rem; */
 }
-.hero-item{
-    flex:1;
-    /* border: 1px solid red; */
-    /* border-radius: 2rem; */
+.hero-item {
+  flex: 1;
+  /* border: 1px solid red; */
+  /* border-radius: 2rem; */
 
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    text-align: center; /* Optionally center text horizontally */
-    height: 100%; /* Ensure the image covers the entire container */
-    margin: 5px 5px;
-    position: relative; /* Added for positioning the button */
-    border-radius: 2rem;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center; /* Optionally center text horizontally */
+  height: 100%; /* Ensure the image covers the entire container */
+  margin: 5px 5px;
+  position: relative; /* Added for positioning the button */
+  border-radius: 2rem;
 
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5); /* Add a box shadow */
-
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5); /* Add a box shadow */
 }
 
 .hero-content {
-    position: relative; /* Added for positioning the button */
-  }
+  position: relative; /* Added for positioning the button */
+}
 
-.hero-image{
-    width: 100%; /* Ensure the image covers the entire container */
-    height: 400px; /* Ensure the image covers the entire container */
-    border-radius: 2rem;
-    object-fit: cover; /* Maintain aspect ratio and cover container */
-
+.hero-image {
+  width: 100%; /* Ensure the image covers the entire container */
+  height: 400px; /* Ensure the image covers the entire container */
+  border-radius: 2rem;
+  object-fit: cover; /* Maintain aspect ratio and cover container */
 }
 .hero-button-1 {
-    /* margin-top: 1rem; */
-    position: absolute;
-    bottom: 10px; /* Adjust the distance from the bottom as needed */
-    left: 50%;
-    transform: translateX(-50%);
+  /* margin-top: 1rem; */
+  position: absolute;
+  bottom: 10px; /* Adjust the distance from the bottom as needed */
+  left: 50%;
+  transform: translateX(-50%);
 
-    padding: 8px 20px;
-    background-color: #fefefe;
-    border: 1px solid black;
-    /* background-color: rgb(52, 240, 52); */
-    color: black;
-    /* border: none; */
-    font-weight: bold;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 8px 20px;
+  background-color: #fefefe;
+  border: 1px solid black;
+  /* background-color: rgb(52, 240, 52); */
+  color: black;
+  /* border: none; */
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+  border-radius: 5px;
+  cursor: pointer;
+}
 .hero-button-2 {
-    position: absolute;
-    bottom: 10px; /* Adjust the distance from the bottom as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    border: 1px solid black;
-    font-size: 18px;
+  position: absolute;
+  bottom: 10px; /* Adjust the distance from the bottom as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid black;
+  font-size: 18px;
 
-    /* margin-top: 1rem; */
-    padding: 8px 20px;
-    background-color: rgb(218, 48, 48);
-    color: white;
-    /* border: none; */
-    font-weight: bold;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+  /* margin-top: 1rem; */
+  padding: 8px 20px;
+  background-color: rgb(218, 48, 48);
+  color: white;
+  /* border: none; */
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  .hero-button-1:hover{
-    background-color: transparent;
-    color:black
-  }
-  .hero-button-2:hover{
-    background-color: transparent;
-    color:black
-  }
+.hero-button-1:hover {
+  background-color: transparent;
+  color: black;
+}
+.hero-button-2:hover {
+  background-color: transparent;
+  color: black;
+}
 
-  @media (max-width : 480px) {
-    .hero-section{
-        flex-direction: column;
-    }
-    .hero-item{
-        height: 250px;
-    }
-    .hero-image{
-        height: 250px;
-
-    }
+@media (max-width: 480px) {
+  .hero-section {
+    flex-direction: column;
   }
+  .hero-item {
+    height: 250px;
+  }
+  .hero-image {
+    height: 250px;
+  }
+}

@@ -37,6 +37,8 @@ const Auth = () => {
       if(res.status === 200){
         const { access_token } = res.data;
         localStorage.setItem('access_token', access_token);
+        localStorage.setItem('user_email', userEmail);
+        
         console.log("the access token is : " ,access_token)
         navigation("/")
         // Cookies.set('access_token', access_token, {httponly: true });
@@ -64,24 +66,23 @@ const Auth = () => {
   }
 
   return (
-    <div className="container">
+    <div className="auth-container">
       <div className="title">{Title}</div>
       <div className="form-cont">
         <div className="input-item">
-        <input className='inputBox' onChange={(e) => setUserEmail(e.target.value)} />
+        <input className='inputBox' placeholder='הזן מייל' onChange={(e) => setUserEmail(e.target.value)} />
 
           <p>:מייל</p>
         </div>
         <div className="input-item">
-        <input type='password' className='inputBox' onChange={(e) => setUserPassword(e.target.value)} />
+        <input type='password' className='inputBox' placeholder='הזן סיסמה' onChange={(e) => setUserPassword(e.target.value)} />
         <p>:סיסמה</p>
 
         </div>
         {authMode && (
            <div className="input-item">
-           <input type='password' className='inputBox' onChange={(e) => setConfirmPassword(e.target.value)} />
+           <input type='password' className='inputBox' placeholder='אימות סיסמה' onChange={(e) => setConfirmPassword(e.target.value)} />
            <p>:אימות סיסמה</p>
-
            </div>
         )}
         {/* <p style={{textAlign:'center',fontSize:14}}>Do you have already account ?</p> */}

@@ -62,6 +62,14 @@ nav .menu span {
     border-radius: 0.2rem;
 }
 
+.signOut{
+    padding: 4px;
+    font-weight: bold;
+}
+.signOut:hover{
+   background-color: yellowgreen;
+}
+
 
 @media (max-width: 480px) {
     nav .menu {

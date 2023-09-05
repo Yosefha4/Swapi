@@ -2,7 +2,7 @@ import '../RealEstate/RealEstate.css'
 
 const Vehicles = () => {
   return (
-    <div className="main-container">
+    <div className="real-container">
       <div className="adv-container">adv1</div>
       <div className="middle-container">
         <div className="search">search</div>

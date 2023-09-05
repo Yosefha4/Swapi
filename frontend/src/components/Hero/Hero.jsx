@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./Hero.css";
 const Hero = () => {
   return (
-    <div className="container">
+    <div className="main-container">
       <div className="adv-section">advz</div>
       <div className="hero-section">
         {/* <div className="hero-item">Real Estate</div> */}
