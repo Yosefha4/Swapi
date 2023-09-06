@@ -41,3 +41,45 @@
     font-weight: bold;
     margin: 20px;
 }
+
+.imageUpButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 15%;
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.imageUpButton:hover{
+    background-color: lightgoldenrodyellow;
+}
+.popup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   padding: 4px;
+    
+}
+
+.preview{
+    padding: 4px;
+    margin-bottom: 4px;
+    background-color: lightgoldenrodyellow;
+   
+}
+.title-prev{
+    background-color: lightgoldenrodyellow;
+    margin-bottom: 16px;
+    text-shadow: 1px 1px 12px white(0, 0, 0);
+    color: black;
+}
+
+.imgPrev{
+    display: flex;
+    flex-direction: column;
+    margin: 16px;
+    align-items: center;
+}
