@@ -1,6 +1,8 @@
 # routes.py
 from flask import Blueprint
 from user.models import User
+from flask_jwt_extended import jwt_required
+
 # from flask_cors import cross_origin
 
 user_bp = Blueprint('user', __name__)
@@ -19,6 +21,13 @@ def signout():
 @user_bp.route("/login" , methods=['POST'])
 def login():
     return User().login()
+
+
+# @cross_origin
+@user_bp.route("/verifyToken" , methods=['GET'])
+@jwt_required()
+def verify():
+    return User().verify()
 
 # from flask import Flask
 # from app import app

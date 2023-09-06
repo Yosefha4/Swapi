@@ -45,6 +45,12 @@ class User:
         session.clear()
         return redirect("/")
     
+    def verify(self):
+        tempText = {
+            "message":"User Authorization Success"
+        }
+        return jsonify(tempText)
+    
     def login(self):
         
         user_data = request.json  # Assuming the request contains JSON data
