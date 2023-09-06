@@ -1,0 +1,36 @@
+.extraContainer{
+    display: flex;
+    justify-content: space-around;
+    height: 250px;
+    width: 100%;
+    /* background-color: aqua; */
+}
+
+.circleContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    box-shadow: 1px 8px 10px black;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    background-color: lightgoldenrodyellow;
+    /* background-image: url('https://www.queenoftheroad.co.il/wp-content/uploads/2017/04/%D7%A7%D7%A0%D7%99%D7%99%D7%AA-%D7%A8%D7%9B%D7%91-%D7%97%D7%99%D7%A9%D7%95%D7%91.jpg'); */
+    /* background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
+}
+.circleContainer:hover{
+ 
+    width: 180px;
+    height: 180px;
+}
+
+@media (max-height:760px){
+    .extraContainer{
+        margin-top: 78px;
+    }
+}

@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import RealEstate from "./components/RealEstate/RealEstate";
 import Vehicles from "./components/Vehicles/Vehicles";
 import Footer from "./components/Footer/Footer";
+import NewApart from "./components/CreateNewItem/NewApart";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,6 +23,7 @@ function App() {
         <Route path="/realEstate" element={<RealEstate />} />
         <Route path="/vehicles" element={<Vehicles />} />
         <Route path="/auth" element={<Auth/>} />
+        <Route path="/createApart" element={<NewApart/>} />
       </Routes>
       {/* <Footer /> */}
       {/* <Auth/> */}

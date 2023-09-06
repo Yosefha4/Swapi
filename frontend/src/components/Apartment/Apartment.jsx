@@ -31,32 +31,32 @@ const Apartment = (props) => {
       <div className="middContainer">
         <div className="info">
           <span
-            style={{ color: "#717171", fontWeight: "bolder", fontSize: 18 }}
+           className="subTitles"
           >
             חדרים
           </span>
-          <span style={{ color: "black", fontWeight: "bold", fontSize: 20 }}>
+          <span className="subInfor">
             {dataArrayAsArray[5]}
           </span>
         </div>
        
         <div className="info">
           <span
-            style={{ color: "#717171", fontWeight: "bolder", fontSize: 18 }}
-          >
+           className="subTitles"
+           >
             עיר
           </span>
-          <span style={{ color: "black", fontWeight: "bold", fontSize: 20 }}>
+          <span className="subInfor">
             {dataArrayAsArray[3]}
           </span>
         </div>
         <div className="info">
           <span
-            style={{ color: "#717171", fontWeight: "bolder", fontSize: 18 }}
-          >
+           className="subTitles"
+           >
             מ"ר
           </span>
-          <span style={{ color: "black", fontWeight: "bold", fontSize: 20 }}>
+          <span  className="subInfor">
             {dataArrayAsArray[7]}
           </span>
         </div>
