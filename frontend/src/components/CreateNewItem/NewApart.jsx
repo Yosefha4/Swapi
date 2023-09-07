@@ -10,10 +10,10 @@ const NewApart = () => {
   const [propType, setPropType] = useState("");
   const [propState, setPropState] = useState("");
   const [propCity, setPropCity] = useState("");
-  // const [propStreet, setPropStreet] = useState("");
+  const [propStreet, setPropStreet] = useState("");
   //Step 2
   const [numOfRooms, setNumOfRooms] = useState(0);
-  const [buildInMeter, setBuildInMeter] = useState("");
+  const [buildInMeter, setBuildInMeter] = useState(0);
   const [parkingNum, setParkingNum] = useState(0);
   const [propDesc, setPropDesc] = useState("");
   //Step 3
@@ -29,22 +29,50 @@ const NewApart = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const token = localStorage.getItem("access_token") ;
-  console.log(token);
+  console.log("token +" +token);
 
   const openPopup = () => {
     setIsPopupOpen(true);
   };
 
-  const closePopup = () => {
+  const closePopup =  () => {
     let temp;
     setIsPopupOpen(false);
     const authorization = VerifyToken().then((result) => {
         temp = result;
         console.log(result)
         console.log(temp)
-    }).then(() => {
+    }).then(async () => {
       if(temp == 200){
         //Call to createPost()
+        try {
+          const res = await axios.post("http://127.0.0.1:5002/create",{
+            whichAction:whichProp,
+            userOwnerId:whichProp,
+            apType:propType,
+            apCity:propCity,
+            apStreet:propStreet,
+            numOfRooms:numOfRooms,
+            parkingNum:parkingNum,
+            moreDesc:propDesc,
+            builtInMeter:buildInMeter,
+            price:propPrice,
+            availDate:availDate,
+            apImages:selectedImages,
+            ownerName:ownerName,
+            ownerPhone:ownerPhone,
+          });
+          if(res.status == 201){
+            alert("המודעה שלך פורסמה בהצלחה")
+          }
+          else{
+            console.log(res.status)
+            console.log(res.data)
+          }
+     
+        } catch (error) {
+          console.log(error)
+        }
         console.log("The status code is : " + temp + "You can post now!")
       }
       else{
@@ -110,7 +138,8 @@ const NewApart = () => {
       whichProp == 0 ||
       propState == 0 ||
       propType == 0 ||
-      propCity.length < 1
+      propCity.length < 1,
+      propStreet.length < 1
     ) {
       alert("You Must select all fields!");
     } else {
@@ -362,10 +391,18 @@ const NewApart = () => {
             <div className="input-item">
               <input
                 className="inputBox"
-                placeholder="איפה נמצא הנכס"
+                placeholder="הכנס את העיר"
                 onChange={(e) => setPropCity(e.target.value)}
               />
               <p>: יישוב</p>
+            </div>
+            <div className="input-item">
+              <input
+                className="inputBox"
+                placeholder="הכנס את הרחוב"
+                onChange={(e) => setPropStreet(e.target.value)}
+              />
+              <p>: רחוב</p>
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <button className="stepBtn" type="submit">
@@ -436,6 +473,7 @@ const NewApart = () => {
                 <input
                   type="date"
                   style={{ textAlign: "center", width: "70%", height: 30 }}
+                  onChange={(e) => setAvailDate(e.target.value)}
                 />
                 <p>תאריך כניסה</p>
               </div>
@@ -523,10 +561,13 @@ const NewApart = () => {
               <strong>עיר :</strong> {propCity}
             </p>
             <p className="preview">
+              <strong>רחוב :</strong> {propStreet}
+            </p>
+            <p className="preview">
               <strong>מצב הנכס :</strong>{" "}
               {parseSelectValueForCondition(propState)}
             </p>
-            <p className="preview">
+            <p className="preview" style={{textAlign:'center'}}>
               <strong>תיאור נוסף :</strong> {propDesc}
             </p>
             <p className="preview">
@@ -537,7 +578,7 @@ const NewApart = () => {
               <strong>מס' חדרים :</strong> {numOfRooms}
             </p>
             <p className="preview">
-              <strong>זמינות : </strong> {availDate.toLocaleString()}
+              <strong>זמינות : </strong> {availDate}
             </p>
             <p className="preview">
               <strong>מ"ר בנוי :</strong> {buildInMeter}
@@ -558,7 +599,7 @@ const NewApart = () => {
                 </p> */}
               </div>
             ))}
-            <button className="stepBtn" onClick={closePopup}>סגור</button>
+            <button className="stepBtn" onClick={closePopup}>אישור</button>
           </div>
         )}
         {stage === 0 && null}

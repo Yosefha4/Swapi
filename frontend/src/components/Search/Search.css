@@ -1,0 +1,49 @@
+
+.searchContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: 70px;
+    padding: 8px;
+    gap: 12px;
+    /* margin: auto; */
+}
+.byCity{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+ 
+
+}
+.byPrice{
+    flex:1;
+    display: flex;
+    flex-direction: column;    gap: 4px;
+
+}
+.byType{
+    flex:1;
+    display: flex;
+    flex-direction: column;    gap: 4px; 
+
+}
+.searchBtn{
+    flex:0.5;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: end;
+    height: 92%;
+    /* margin-top: 4px; */
+
+
+    
+}
+.searchTitle{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+   
+}

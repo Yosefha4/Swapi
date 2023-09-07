@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Apartment from "../Apartment/Apartment";
 import "./RealEstate.css";
 import axios from "axios";
+import Search from "../Search/Search";
 
 const RealEstate = () => {
   const [apartments, setApartments] = useState([]);
@@ -30,13 +31,15 @@ const RealEstate = () => {
         <img src="https://directiveconsulting.com/wp-content/uploads/2020/04/image-2-1.png" />
       </div>
       <div className="middle-container">
-        <div className="search">search</div>
+        <div className="search">
+          <Search />
+        </div>
         <div className="recommended">
-          recco
+          מומלצים
           <Apartment />
         </div>
         <div className="items">
-          items
+          מודעות חדשות
           {apartments.length > 1 ? (
             apartments.map((item) => <Apartment key={item} data={item} />)
           ) : (

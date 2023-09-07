@@ -20,12 +20,9 @@ const Apartment = (props) => {
   const handleSpanClick = (e,phoneNumber) => {
     // Prevent the click event from propagating to the parent container
     e.stopPropagation();
-    // Add any additional logic you need for the <span> click here
-        // Construct the tel: URL with the phone number
-    const telUrl = `tel:${phoneNumber}`;
-        // Open the phone application to initiate the call
-    window.location.href = telUrl;
-    console.log(telUrl)
+
+    
+    console.log(phoneNumber)
   };
   // const handleClick = () => {
   //   // Execute your condition here and toggle the `clicked` state accordingly
@@ -56,7 +53,7 @@ const Apartment = (props) => {
   ); // Remove commas and parse
   const formatedPrice = isNaN(numericPrice)
     ? "Invalid Price"
-    : numericPrice.toLocaleString() + "₪";
+    : "₪" +  numericPrice.toLocaleString() ;
 
   // Now, use the formatedPrice in your code where needed
   // console.log(formatedPrice);
@@ -80,11 +77,11 @@ const Apartment = (props) => {
           <div style={{display:'flex',flexDirection:'column',margin:'auto',gap:18}}>
           <div className="contantInfo">
             <strong>שם : </strong>
-            <span style={{backgroundColor:'white',boxShadow:'0px 1px 5px black',color:'black',borderRadius:1.5,padding:8,fontWeight:'bold'}}>אורן</span>
+            <span style={{backgroundColor:'white',boxShadow:'0px 1px 5px black',color:'black',borderRadius:1.5,padding:8,fontWeight:'bold'}}>{dataArrayAsArray[13]}</span>
          </div>
           <div style={{display:'flex',flexDirection:'column',marginTop:16,gap:6}}>
           <span>טלפון</span>
-          <span  onClick={(e) => handleSpanClick(e, '050-123-4567')}  style={{backgroundColor:'lightseagreen',color:'black',boxShadow:'0px 1px 5px yellow',borderRadius:5,padding:6,fontWeight:'bold',cursor:'pointer',border:'1px solid black'}}>050-123-4567</span>
+          <span  onClick={(e) => handleSpanClick(e, dataArrayAsArray[14])}  style={{backgroundColor:'lightseagreen',color:'black',boxShadow:'0px 1px 5px yellow',borderRadius:5,padding:6,fontWeight:'bold',cursor:'pointer',border:'1px solid black'}}>{dataArrayAsArray[14]}</span>
          </div>
 
   
