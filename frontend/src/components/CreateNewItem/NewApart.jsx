@@ -10,6 +10,7 @@ const NewApart = () => {
   const [propType, setPropType] = useState("");
   const [propState, setPropState] = useState("");
   const [propCity, setPropCity] = useState("");
+  // const [propStreet, setPropStreet] = useState("");
   //Step 2
   const [numOfRooms, setNumOfRooms] = useState(0);
   const [buildInMeter, setBuildInMeter] = useState("");
@@ -20,10 +21,14 @@ const NewApart = () => {
   const [availDate, setAvailDate] = useState(new Date());
   //Step 4
   const [selectedImages, setSelectedImages] = useState([]);
+  //Step5
+  const [ownerName, setOwnerName] = useState("");
+  const [ownerPhone, setOwnerPhone] = useState("");
+
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem("access_token") ;
   console.log(token);
 
   const openPopup = () => {
@@ -31,30 +36,50 @@ const NewApart = () => {
   };
 
   const closePopup = () => {
+    let temp;
     setIsPopupOpen(false);
+    const authorization = VerifyToken().then((result) => {
+        temp = result;
+        console.log(result)
+        console.log(temp)
+    }).then(() => {
+      if(temp == 200){
+        //Call to createPost()
+        console.log("The status code is : " + temp + "You can post now!")
+      }
+      else{
+        console.log("Something get wrong...")
+      }
+    })
+    console.log("authorization: ",authorization)
     setStage(1)
   };
 
   const VerifyToken = async () => {
+    let tempToken = token ? token : 'a1b2c3d4e5f6f6f65'
     const opts = {
       headers: {
-        Authorization: "Bearer " + token,
+        Authorization: "Bearer " + tempToken,
       },
     };
     try {
-      const res = await axios.get(
-        "http://127.0.0.1:5000/user/verifyToken",
-        opts
-      );
+      const res = await axios.get("http://127.0.0.1:5000/user/verifyToken", opts);
+  
       if (res.status === 200) {
-        console.log("Test Authoriztion Success !");
+        console.log("Test Authorization Success !");
         return res.status;
+        // Handle the case where the user is authorized
+      } else if (res.status === 422) {
+        console.log("You Are Not Authorized!");
+        return;
+        // Handle the case where the user is not authorized
       } else {
-        return res.status;
+        console.log("Unexpected Status Code: " + res.status);
+        // Handle other unexpected status codes
       }
     } catch (error) {
-      alert("You Must Login Before Add New Post");
-      console.log(error);
+      alert("You Must Login Before Adding a New Post");
+      console.error(error);
     }
   };
 
@@ -257,42 +282,7 @@ const NewApart = () => {
     }
   };
 
-  const popupContent = (
-    <div className="popup">
-      <h2>Property Details</h2>
-      <p>
-        <strong>Which Prop:</strong> {parseSelectValue(whichProp)}
-      </p>
-      <p>
-        <strong>Prop City:</strong> {propCity}
-      </p>
-      <p>
-        <strong>Prop State:</strong> {parseSelectValueForCondition(propState)}
-      </p>
-      <p>
-        <strong>Prop Description:</strong> {propDesc}
-      </p>
-      <p>
-        <strong>Prop Type:</strong> {parseSelectValueForPropType(propType)}
-      </p>
-      <p>
-        <strong>Number of Rooms:</strong> {numOfRooms}
-      </p>
-      <p>
-        <strong>Availability Date:</strong> {availDate}
-      </p>
-      <p>
-        <strong>Building in Meters:</strong> {buildInMeter}
-      </p>
-      <p>
-        <strong>Property Price:</strong> {propPrice}
-      </p>
-      <p>
-        <strong>Selected Images:</strong> {selectedImages.join(", ")}
-      </p>
-      <button onClick={closePopup}>Close</button>
-    </div>
-  );
+
 
   return (
     <div className="apartContainer">

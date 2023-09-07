@@ -1,13 +1,21 @@
 .container {
   display: flex;
   flex-direction: row;
-  max-height: 80px;
+  height: 80px;
   margin: auto;
   background-color: lightgoldenrodyellow;
   /* border: 1px solid black; */
   box-shadow: 1px 1px 7px black;
   border-radius: 3px;
   margin-bottom: 5px;
+}
+.container-click {
+  display: flex;
+  
+  height: 380px;
+
+  background-color: rgb(255, 255, 255);
+/* align-items: center; */
 }
 .firstContainer {
   flex: 2;
@@ -21,6 +29,13 @@
   align-items: center;
   gap:6px;
 }
+.first-click{
+  align-items: start;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  background-color: lightgoldenrodyellow;
+
+}
 
 .middContainer {
   flex: 6;
@@ -28,8 +43,45 @@
   /* background-color: rebeccapurple; */
   box-shadow: 0px 0px 2px 0px black;
   justify-content: space-between;
+  /* align-items: s; */
   padding: 20px;
+  background-color: lightgoldenrodyellow;
+
 }
+
+.middle-click{
+  align-items: start;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: lightgray; */
+
+}
+.trmpc{
+  display: flex;
+  flex:1;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 14px;
+  
+  /* margin: auto; */
+  background-color: lightgoldenrodyellow;
+
+}
+.middle-open{
+  display: flex;
+  flex:5;
+
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+
+}
+
 
 .lastContainer {
   flex: 2;
@@ -38,6 +90,17 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+.last-click{
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-direction: column;
+  width: max-content;
+  margin: 0 auto;
+  /* margin: 4px; */
+  background-color: lightgoldenrodyellow;
+
 }
 
 .image {
@@ -53,12 +116,13 @@
    opacity: 0.6;
   }
 .firstContainer:hover {
-   background-color: white;
+  opacity: 0.9;
   }
 
   .info{
     display: flex;
     flex-direction: column-reverse;
+
   }
 
   .subTitles{
