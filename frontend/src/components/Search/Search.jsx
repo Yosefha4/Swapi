@@ -3,7 +3,7 @@ import "./Search.css"
 
 const Search = () => {
   return (
-    <div>
+    <div className="mainSearchBar">
       <div className="searchTitle">
         <h3 style={{textAlign:'center',padding:8,backgroundColor:'greenyellow',borderRadius:1}}> ? איזה נכס תרצו לחפש</h3>
       </div>

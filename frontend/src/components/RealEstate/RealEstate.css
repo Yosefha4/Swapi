@@ -26,6 +26,7 @@
   /* border: 1px solid black; */
   border-radius: 3px;
   box-shadow: 0px 1px 4px black;
+
 }
 .recommended {
   /* height: 150px; */
@@ -51,13 +52,22 @@
   top: 0; */
 }
 
+
 @media (max-width: 480px) {
   .main-container {
     flex-direction: column;
+  } .search {
+    width: 60%;
   }
+  
 }
 @media (max-width: 880px) {
   .adv-container {
     display: none;
+  }
+}
+@media (max-width: 748px) {
+  .search {
+    width: 80%;
   }
 }

@@ -1,4 +1,17 @@
-/* .container{
-    height:50vh;
-    background-color: red;
-} */
+.footer-container{
+    height:30vh;
+    /* background: #dddddd    ; */
+    background-color: #0f172a;
+
+    box-shadow: 1px 1px 7px black;
+    display: flex;
+    justify-content: space-around;
+}
+
+.rightSide{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    color: white;
+}

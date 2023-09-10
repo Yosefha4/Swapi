@@ -63,6 +63,17 @@ const Apartment = (props) => {
   const middleClassName = `middContainer ${expanded ? "middle-click" : ""}`;
   const lastClassName = `lastClassName ${expanded ? "last-click" : ""}`;
 
+  function countVisibleCharacters(str) {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+      // Check if the character is visible (not a control character)
+      if (str[i].charCodeAt(0) >= 32) {
+        count++;
+      }
+    }
+    return count;
+  }
+
   return (
     <div className={containerClassName} onClick={handleClick}>
       <div className={firstClassName}>
@@ -77,7 +88,7 @@ const Apartment = (props) => {
           <div style={{display:'flex',flexDirection:'column',margin:'auto',gap:18}}>
           <div className="contantInfo">
             <strong>שם : </strong>
-            <span style={{backgroundColor:'white',boxShadow:'0px 1px 5px black',color:'black',borderRadius:1.5,padding:8,fontWeight:'bold'}}>{dataArrayAsArray[13]}</span>
+            <span style={{backgroundColor:'white',boxShadow:'0px 1px 5px black',color:'black',borderRadius:1.5,padding:8,fontWeight:'bold'}}>{dataArrayAsArray[13] ? dataArrayAsArray[13] : "לא ידוע"}</span>
          </div>
           <div style={{display:'flex',flexDirection:'column',marginTop:16,gap:6}}>
           <span>טלפון</span>

@@ -3,7 +3,13 @@ import "./Hero.css";
 const Hero = () => {
   return (
     <div className="main-container">
-      <div className="adv-section">advz</div>
+      <div className="adv-section">
+        <div className="contextadv">
+          <h1 style={{fontFamily:'Tahoma, Geneva, Verdana, sans-serif',color:'whitesmoke'}}>? רוצים לפרסם מודעה  </h1>
+          <h2 style={{fontFamily:'Tahoma, Geneva, Verdana, sans-serif',textShadow:'2px 2px 10px red',marginTop:18,color:'whitesmoke'}}>! מבצע מיוחד ל-50 הנרשמים לאתר : חבילת פרסום פרימיום לשלושה חודשים חינם</h2>
+          <button style={{marginTop:36, cursor:'pointer',padding:'4px 10px',fontWeight:'bold',width:'10%',borderRadius:5,border:'2px solid black'}}>הרשמה</button>
+        </div>
+      </div>
       <div className="hero-section">
         {/* <div className="hero-item">Real Estate</div> */}
         <div className="hero-item">

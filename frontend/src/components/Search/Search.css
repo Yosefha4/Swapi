@@ -47,3 +47,16 @@
     justify-content: center;
    
 }
+
+@media (max-width:748px){
+    .searchTitle{
+        display: none;
+    }
+    .searchContainer{
+        flex-direction: column;
+        height: max-content;
+        align-items: center;
+        width: 100%;
+    }
+
+}

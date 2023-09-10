@@ -1,5 +1,6 @@
 // import { useEffect } from "react";
 import Extra from "./ExtraServices/Extra"
+import Footer from "./Footer/Footer"
 import Hero from "./Hero/Hero"
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
     <div style={{height:'100vh',backgroundColor:'whitesmoke'}} >
       <Hero />
       <Extra />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

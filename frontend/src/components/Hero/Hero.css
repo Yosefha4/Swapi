@@ -11,8 +11,18 @@
   height: 200px;
   width: 90%;
   border-radius: 5px;
-  margin: 0 12px;
+  margin: 8px 12px;
   background-color: lightsalmon;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  
+}
+.contextadv{
+  margin:12px;
+  padding: 12px;
+ /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  
 }
 
 .hero-section {
