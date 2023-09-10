@@ -24,13 +24,23 @@
     background-position: center; */
 }
 .circleContainer:hover{
- 
-    width: 180px;
-    height: 180px;
+    background-color: rgb(212, 212, 127);
+
 }
 
 @media (max-height:760px){
     .extraContainer{
         margin-top: 78px;
+    }
+}
+
+@media (max-width: 480px) {
+    .extraContainer{
+        margin-top: 158px;
+    }
+}
+@media (max-width: 400px) {
+    .extraContainer{
+        margin-top: 226px;
     }
 }

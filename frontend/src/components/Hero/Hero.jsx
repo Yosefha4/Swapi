@@ -7,7 +7,7 @@ const Hero = () => {
         <div className="contextadv">
           <h1 style={{fontFamily:'Tahoma, Geneva, Verdana, sans-serif',color:'whitesmoke'}}>? רוצים לפרסם מודעה  </h1>
           <h2 style={{fontFamily:'Tahoma, Geneva, Verdana, sans-serif',textShadow:'2px 2px 10px red',marginTop:18,color:'whitesmoke'}}>! מבצע מיוחד ל-50 הנרשמים לאתר : חבילת פרסום פרימיום לשלושה חודשים חינם</h2>
-          <button style={{marginTop:36, cursor:'pointer',padding:'4px 10px',fontWeight:'bold',width:'10%',borderRadius:5,border:'2px solid black'}}>הרשמה</button>
+          <button className="adv-button">הרשמה</button>
         </div>
       </div>
       <div className="hero-section">

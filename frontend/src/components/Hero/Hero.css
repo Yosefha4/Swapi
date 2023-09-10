@@ -16,6 +16,8 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5); /* Add a box shadow */
+
   
 }
 .contextadv{
@@ -98,6 +100,17 @@
   cursor: pointer;
 }
 
+.adv-button{
+  margin-top: 36px;
+  cursor: pointer;
+  padding: 4px 10px;
+  font-weight: bold;
+  width: 10%;
+  border-radius: 5px;
+  border:1px solid black
+  /* {marginTop:36, cursor:'pointer',padding:'4px 10px',fontWeight:'bold',width:'10%',borderRadius:5,border:'2px solid black' */
+}
+
 .hero-button-1:hover {
   background-color: transparent;
   color: black;
@@ -110,11 +123,35 @@
 @media (max-width: 480px) {
   .hero-section {
     flex-direction: column;
+    height: 500px;
   }
   .hero-item {
     height: 250px;
   }
   .hero-image {
     height: 250px;
+  }
+}
+@media (max-width: 748px) {
+  .adv-button{
+    /* margin-top: 0px;
+    padding: 4px; */
+    align-items: center;
+    padding: 8px;
+    width: 20%;
+
+  }
+  .contextadv{
+    margin: 0px;
+    padding: 0px;
+  }
+  .adv-section{
+    height: 250px;
+  }
+}
+
+@media (max-width:400px){
+  .adv-section{
+    height: 300px;
   }
 }
