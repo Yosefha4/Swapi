@@ -32,7 +32,7 @@ const RealEstate = () => {
       </div>
       <div className="middle-container">
         <div className="search">
-          <Search />
+          <Search apartments={apartments} />
         </div>
         <div className="recommended">
           מומלצים

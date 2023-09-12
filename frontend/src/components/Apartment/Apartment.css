@@ -81,6 +81,7 @@
   border-radius: 5px;
   background-color: whitesmoke;
 
+
 }
 
 
@@ -95,7 +96,7 @@
 .last-click{
   display: flex;
   align-items: start;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: column;
   width: max-content;
   margin: 0 auto;
