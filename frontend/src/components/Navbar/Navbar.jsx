@@ -48,7 +48,7 @@ const Navbar = () => {
       </div>
      {isLogin&& <div className="loginDiv">
      
-        <button className="newAdv" onClick={() => navigation("/createApart")}>פרסום מודעה חדשה</button>
+        <button className="newAdv" onClick={() => navigation("/newItem")}>פרסום מודעה חדשה</button>
         
         <button className="signOut" onClick={handleLogOut}>התנתקות</button>
         <p>ברוך הבא</p>

@@ -7,11 +7,13 @@ import Search from "../Search/Search";
 
 const RealEstate = () => {
   const [apartments, setApartments] = useState([]);
+  const [filteredApartments, setFilteredApartments] = useState([]);
+  const [isFiltered,setIsFiltered]= useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:5002/");
+        const res = await axios.get("http://127.0.0.1:8080/");
         console.log(res.data);
         setApartments(res.data);
       } catch (error) {
@@ -20,6 +22,17 @@ const RealEstate = () => {
     };
     fetchData();
   }, []);
+
+    // Callback function to update filtered apartments
+    const updateFilteredApartments = (filtered) => {
+      setFilteredApartments(filtered);
+    };
+
+
+    const updateFlag = () => {
+      setIsFiltered(!isFiltered);
+    };
+  
 
   {
     apartments.length > 1 && console.log(apartments[1]);
@@ -32,7 +45,8 @@ const RealEstate = () => {
       </div>
       <div className="middle-container">
         <div className="search">
-          <Search apartments={apartments} />
+        <Search data={apartments} updateFilteredApartments={updateFilteredApartments} updateFlag={updateFlag}  />
+
         </div>
         <div className="recommended">
           מומלצים
@@ -40,10 +54,10 @@ const RealEstate = () => {
         </div>
         <div className="items">
           מודעות חדשות
-          {apartments.length > 1 ? (
+          {!isFiltered ? (
             apartments.map((item) => <Apartment key={item} data={item} />)
           ) : (
-            <Apartment />
+            filteredApartments.map((item) => <Apartment key={item} data={item} />)
           )}
         </div>
       </div>

@@ -4,30 +4,33 @@ import { useState } from "react";
 import "./Search.css"
 
 
-const Search = ({apartments}) => {
+const Search = ({ data, updateFilteredApartments,updateFlag}) => {
   const [city, setCity] = useState('');
   const [price, setPrice] = useState('');
   const [propertyType, setPropertyType] = useState('');
-  const [filteredApartments, setFilteredApartments] = useState(apartments);
+  // const [filteredApartments, setFilteredApartments] = useState(data);
 
   const handleSearch = () => {
-    console.log("The city:" + city + "|  The price: " + price + " | The propType: " + propertyType)
     // Filter the apartments based on the search criteria
-    const filtered = apartments.filter((apartment) => {
+    console.log("The current data is : " + data[4][4])
+    const filtered = data.filter((apartment) => {
       // Check if the city matches the search input
-      const cityMatch = apartment.dataArrayAsArray[4].includes(city);
+      console.log("this apart : " + apartment )
+      const cityMatch = apartment[4].includes(city);
 
-      // Check if the price matches the search input (you can customize this)
-      const priceMatch = apartment.formatedPrice.includes(price);
+      // // Check if the price matches the search input (you can customize this)
+      // const priceMatch = apartment.formatedPrice.includes(price);
 
-      // Check if the property type matches the search input
-      const typeMatch = apartment.dataArrayAsArray[3].includes(propertyType);
+      // // Check if the property type matches the search input
+      // const typeMatch = apartment.dataArrayAsArray[3].includes(propertyType);
 
       // Return true if all criteria match, otherwise false
-      return cityMatch && priceMatch && typeMatch;
+      return cityMatch ;
     });
 
-    setFilteredApartments(filtered);
+    // Update filtered apartments in the parent component
+    updateFilteredApartments(filtered);
+    updateFlag();
   };
 
   return (
