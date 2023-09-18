@@ -1,13 +1,10 @@
 version: '3'
+
 services:
   flask-app:
-    build:
-     context: .
-     dockerfile: Dockerfile
+    image: auth_python-flask-app:latest 
     ports:
-      - "5001:5000"
-    volumes:
-     - .:/app
+      - "5000:5000"
     environment:
       MONGO_URI: ${MONGO_URI}
     depends_on:
