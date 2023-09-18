@@ -9,7 +9,7 @@ services:
     volumes:
      - .:/app
     environment:
-      MONGO_URI: "mongodb+srv://yosefha4:yosefha4@cluster0.k4kiax3.mongodb.net/?retryWrites=true&w=majority"
+      MONGO_URI: "**"
     depends_on:
       - mongo
 
