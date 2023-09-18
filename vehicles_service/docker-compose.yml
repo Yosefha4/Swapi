@@ -9,7 +9,7 @@ services:
     volumes:
      - .:/app
     environment:
-      MONGO_URI: "mongodb+srv://yosef050468:yosefha4@cluster0.qy9esls.mongodb.net/?retryWrites=true&w=majority"
+      MONGO_URI: "***"
     depends_on:
       - mongo
 
@@ -18,7 +18,7 @@ services:
     container_name: my-mongo-vehicles
     environment:
       MONGO_INITDB_ROOT_USERNAME: yosef050468
-      MONGO_INITDB_ROOT_PASSWORD: yosefha4
+      MONGO_INITDB_ROOT_PASSWORD: ***
     ports:
       - "27017:27017"
     volumes:
