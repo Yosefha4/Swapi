@@ -59,7 +59,7 @@ const Vehicles = () => {
         </div>
         <div className="items">
           {cars.length > 1 ? cars.map((item,index) => (
-            <Car key={index} carData={item} />
+            <Car key={index} carsDataArr={item} />
           ) ) : <Car />}
         </div>
       </div>

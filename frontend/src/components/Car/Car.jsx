@@ -1,18 +1,41 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import './Car.css'
 import "../Apartment/Apartment.css";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 
-const Car = (props) => {
+const Car = ({carsDataArr}) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // const carsDataArr = props.carData;
+
+  const [currentImgUrl,setCurrentImgUrl] = useState("");
+
+  useEffect(() => {
+    // Define a function to get the download URL for an image based on its name
+    const getImageDownloadURL = async (imageName) => {
+      try {
+        const url = await getDownloadURL(ref(storage, `images/${imageName}`));
+        setCurrentImgUrl(url);
+        return url;
+      } catch (error) {
+        console.error("Error fetching image URL:", error);
+        return null;
+      }
+    };
+    carsDataArr && getImageDownloadURL(carsDataArr.vehicleImages);
+    // console.log("temptemp: temp :" + currentImgUrl)
+  },[currentImgUrl,carsDataArr])
+
 
   const containerClassName = `container ${isOpen ? "container-click" : ""}`;
   const firstClassName = `firstContainer ${isOpen ? "first-click" : ""}`;
   const middleClassName = `middContainer ${isOpen ? "middle-click" : ""}`;
   const lastClassName = `lastClassName ${isOpen ? "last-click" : ""}`;
 
-  const carsDataArr = props.carData;
+
 
   const carImages = carsDataArr ? carsDataArr.vehicleImages : ["", ""];
   const tempItem = carImages;
@@ -155,14 +178,14 @@ const Car = (props) => {
       {/* <span>מ"ר</span> */}
 
       <div className={lastClassName}>
-        {isOpen &&
+        {/* {isOpen &&
           tempItem
             ?.filter((item, index) => index !== 0) // Filter out the first item
             .map((item, index) => (
               <img key={index} className="image" src={item} />
-            ))}
+            ))} */}
 
-        <img className="image" src={tempItem ? tempItem[0] : ""} />
+        <img className="image" src={currentImgUrl} />
       </div>
     </div>
   );

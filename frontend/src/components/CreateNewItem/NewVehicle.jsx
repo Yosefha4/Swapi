@@ -3,6 +3,9 @@
 import axios from "axios";
 import "./NewApart.css";
 import { useState } from "react";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "../../firebase";
+import { v4 } from "uuid";
 
 const NewVehicle = () => {
   const [stage, setStage] = useState(1);
@@ -11,16 +14,16 @@ const NewVehicle = () => {
   const [propType, setPropType] = useState("");
   const [propBrand, setPropBrand] = useState("");
   const [propModel, setPropModel] = useState("");
-  const [yearOfManufacture, setYearOfManufacture] = useState(0);
+  const [yearOfManufacture, setYearOfManufacture] = useState("");
 
-  const [numOfDoors, setNumOfDoors] = useState("");
-  const [engineCapacity, setEngineCapacity] = useState("");
+  const [numOfDoors, setNumOfDoors] = useState(0);
+  const [engineCapacity, setEngineCapacity] = useState(0);
   const [gearboxType, setGearboxType] = useState("");
 
   //Step 2
 
-  const [vehicleColor, setVehicleColor] = useState(0);
-  const [testExpire, setTestExpire] = useState(0);
+  const [vehicleColor, setVehicleColor] = useState("");
+  const [testExpire, setTestExpire] = useState("");
   const [whichHand, setWhichHand] = useState("");
   const [currentOwnership, setCurrentOwnership] = useState("");
   const [lastOwnership, setLastOwnership] = useState("");
@@ -31,11 +34,12 @@ const NewVehicle = () => {
   const [vehicleLocation, setVehicleLocation] = useState("");
   const [vehicleArea, setVehicleArea] = useState("");
   //Step 4
-  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState(null);
   //Step5
   const [ownerName, setOwnerName] = useState("");
   const [ownerPhone, setOwnerPhone] = useState("");
 
+  const [imgAddress,setImgAddress] = useState("");
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -57,23 +61,29 @@ const NewVehicle = () => {
       if(temp == 200){
         //Call to createPost()
         try {
-          const res = await axios.post("http://127.0.0.1:5054/api/create_vehicle",{
-     
-            userOwnerId:whichProp,
-            apType:propType,
-            apCity:propCity,
-            apStreet:propStreet,
-            numOfRooms:numOfRooms,
-            parkingNum:parkingNum,
-            moreDesc:propDesc,
-            builtInMeter:buildInMeter,
-            price:propPrice,
-            availDate:availDate,
-            apImages:selectedImages,
-            ownerName:ownerName,
-            ownerPhone:ownerPhone,
+          const res = await axios.post("https://cars-ms.onrender.com/vehicles/api/create_vehicle",{
+            vehicleType:propType,
+            vehicleBrand:propBrand,
+            vehicleModel:propModel,
+            yearOfManufacture:yearOfManufacture,
+            numOfDoors:numOfDoors,
+            engineCapacity:engineCapacity,
+            gearboxType:gearboxType,
+            vehicleColor:vehicleColor,
+            testExpire:testExpire,
+            whichHand:whichHand,
+            currentOwnership:currentOwnership,
+            lastOwnership:lastOwnership,
+            kilometer:kilometer,
+            moreDetails:moreDetails,
+            price:price,
+            vehicleLocation:vehicleLocation,
+            vehicleArea:vehicleArea,
+            vehicleImages:imgAddress,
+            ownerPhoneNum:ownerPhone,
+            ownerName:ownerName
           });
-          if(res.status == 201){
+          if(res.status == 201 || res.status == 200 ){
             alert("המודעה שלך פורסמה בהצלחה")
           }
           else{
@@ -188,42 +198,28 @@ const NewVehicle = () => {
     return formattedValue;
   };
 
-  const handleImageUpload = (event) => {
-    const files = event.target.files;
-    const imageArray = Array.from(files);
-    setSelectedImages((prevImages) => [...prevImages, ...imageArray]);
-  };
+  const uploadImgToFirebase = () => {
+    if(selectedImages === null) return ;
 
-  
-  function handleUploadImg(event) {
-    const files = event.target.files;
-    const newImages = [];
-  
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
-  
-      reader.onload = (e) => {
-        // Push the binary data and content type into the newImages array
-        newImages.push({
-          data: e.target.result, // Use e.target.result directly as ArrayBuffer
-          contentType: file.type,
-        });
-      };
-  
-      reader.readAsArrayBuffer(file);
-    }
-  
-    setSelectedImages([...selectedImages, ...newImages]);
+    const newV4Uuid = v4();
+    console.log("The img uuid is : " + newV4Uuid);
+    setImgAddress(newV4Uuid);
+
+    const imageRef = ref(storage,`images/${newV4Uuid}`);
+    uploadBytes(imageRef,selectedImages).then(() => {
+      alert("Image Upload !")
+    
+    })
   }
-  
 
   const handleStep3 = (e) => {
     e.preventDefault();
+    // console.log(first)
     setStage(4);
   };
   const handleStep4 = (e) => {
     e.preventDefault();
+    uploadImgToFirebase();
     openPopup();
     setStage(0);
   };
@@ -529,7 +525,8 @@ const NewVehicle = () => {
                     type="file"
                     accept="image/*"
                     multiple
-                    onChange={handleUploadImg}
+                    onChange={(e) => setSelectedImages(e.target.files[0])}
+                    // onChange={handleUploadImg}
                     className="imageUpButton"
                   />
                   {/* <p>העלה תמונות</p> */}
@@ -544,7 +541,7 @@ const NewVehicle = () => {
                 margin: 4,
               }}
             >
-              {selectedImages.map((image, index) => (
+              {/* {selectedImages.map((image, index) => (
                 <img
                   key={index}
                   src={URL.createObjectURL(image)}
@@ -552,7 +549,7 @@ const NewVehicle = () => {
                   width="100"
                   height="100"
                 />
-              ))}
+              ))} */}
             </div>
             <div className="buttonsCont">
               <button className="stepBtn" onClick={handleStep4}>
@@ -624,18 +621,8 @@ const NewVehicle = () => {
               <strong>  שם  : </strong> {ownerName}
             </p>
             {/* <p><strong>Selected Images:</strong> {selectedImages.map(image => image.name).join(', ')}</p> */}
-            {selectedImages.map((image, index) => (
-              <div key={index} className="imgPrev">
-                <img
-                  src={URL.createObjectURL(image)}
-                  alt={`Selected Image ${index + 1}`}
-                  style={{ maxWidth: "100px", maxHeight: "100px" }} // Adjust the style as needed
-                />
-                {/* <p>
-                  <strong>Image {index + 1}:</strong> {image.name}
-                </p> */}
-              </div>
-            ))}
+            {selectedImages == "" || selectedImages == null ? " " : <img width={100} height={100} src={selectedImages} />}
+
             <button className="stepBtn" onClick={closePopup}>אישור</button>
           </div>
         )}

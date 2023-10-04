@@ -55,7 +55,7 @@ const NewApart = () => {
         try {
           const res = await axios.post("https://apartmen-ms.onrender.com/aparts/api/create_apartment",{
             whichAction:whichProp,
-            userOwnerId:whichProp,
+            userOwnerId:"whichProp",
             apType:propType,
             apCity:propCity,
             apStreet:propStreet,
