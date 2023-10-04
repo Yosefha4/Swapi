@@ -18,7 +18,7 @@ const Hero = () => {
               src="https://img.freepik.com/premium-photo/male-hands-protect-red-toy-car_220873-6146.jpg?w=1060"
               className="hero-image"
             />
-            <Link to="vehicles">
+            <Link to="/vehicles">
               <button className="hero-button-2">רכב</button>
             </Link>
           </div>
@@ -29,7 +29,7 @@ const Hero = () => {
               src="https://img.freepik.com/free-photo/house-key-home-insurance-broker-agent-s-hand-protection_1150-14910.jpg?w=1060&t=st=1693736813~exp=1693737413~hmac=6f486bd1d69899066d817d972d4557989ed2b3108413a13e662a016cfc094755"
               className="hero-image"
             />
-            <Link to="realEstate">
+            <Link to="/realEstate">
               <button className="hero-button-1">נדל"ן</button>
             </Link>
           </div>

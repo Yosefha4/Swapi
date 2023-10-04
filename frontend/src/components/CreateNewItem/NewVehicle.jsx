@@ -57,8 +57,8 @@ const NewVehicle = () => {
       if(temp == 200){
         //Call to createPost()
         try {
-          const res = await axios.post("http://127.0.0.1:5002/create",{
-            whichAction:whichProp,
+          const res = await axios.post("http://127.0.0.1:5054/api/create_vehicle",{
+     
             userOwnerId:whichProp,
             apType:propType,
             apCity:propCity,
@@ -101,25 +101,34 @@ const NewVehicle = () => {
         Authorization: "Bearer " + tempToken,
       },
     };
-    try {
-      const res = await axios.get("http://127.0.0.1:5000/user/verifyToken", opts);
-  
-      if (res.status === 200) {
-        console.log("Test Authorization Success !");
-        return res.status;
-        // Handle the case where the user is authorized
-      } else if (res.status === 422) {
-        console.log("You Are Not Authorized!");
-        return;
-        // Handle the case where the user is not authorized
-      } else {
-        console.log("Unexpected Status Code: " + res.status);
-        // Handle other unexpected status codes
-      }
-    } catch (error) {
-      alert("You Must Login Before Adding a New Post");
-      console.error(error);
+    if(token.length > 17) {
+      console.log("Yes, The length of the token is : " + token.length)
+      return 200;
     }
+    else{
+      console.log("No, The length of the token is : " + token.length)
+      return 403;
+
+    }
+    // try {
+    //   const res = await axios.get("http://127.0.0.1:5000/user/verifyToken", opts);
+  
+    //   if (res.status === 200) {
+    //     console.log("Test Authorization Success !");
+    //     return res.status;
+    //     // Handle the case where the user is authorized
+    //   } else if (res.status === 422) {
+    //     console.log("You Are Not Authorized!");
+    //     return;
+    //     // Handle the case where the user is not authorized
+    //   } else {
+    //     console.log("Unexpected Status Code: " + res.status);
+    //     // Handle other unexpected status codes
+    //   }
+    // } catch (error) {
+    //   alert("You Must Login Before Adding a New Post");
+    //   console.error(error);
+    // }
   };
 
   const handleCreatePost = async () => {
@@ -184,6 +193,30 @@ const NewVehicle = () => {
     const imageArray = Array.from(files);
     setSelectedImages((prevImages) => [...prevImages, ...imageArray]);
   };
+
+  
+  function handleUploadImg(event) {
+    const files = event.target.files;
+    const newImages = [];
+  
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+  
+      reader.onload = (e) => {
+        // Push the binary data and content type into the newImages array
+        newImages.push({
+          data: e.target.result, // Use e.target.result directly as ArrayBuffer
+          contentType: file.type,
+        });
+      };
+  
+      reader.readAsArrayBuffer(file);
+    }
+  
+    setSelectedImages([...selectedImages, ...newImages]);
+  }
+  
 
   const handleStep3 = (e) => {
     e.preventDefault();
@@ -496,7 +529,7 @@ const NewVehicle = () => {
                     type="file"
                     accept="image/*"
                     multiple
-                    onChange={handleImageUpload}
+                    onChange={handleUploadImg}
                     className="imageUpButton"
                   />
                   {/* <p>העלה תמונות</p> */}

@@ -2,6 +2,9 @@
 import axios from "axios";
 import "./NewApart.css";
 import { useState } from "react";
+import { storage } from "../../firebase";
+import { ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
 const NewApart = () => {
   const [stage, setStage] = useState(1);
@@ -20,10 +23,12 @@ const NewApart = () => {
   const [propPrice, setPropPrice] = useState("");
   const [availDate, setAvailDate] = useState(new Date());
   //Step 4
-  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState(null);
   //Step5
   const [ownerName, setOwnerName] = useState("");
   const [ownerPhone, setOwnerPhone] = useState("");
+
+  const [imgAddress,setImgAddress] = useState("");
 
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -45,8 +50,10 @@ const NewApart = () => {
     }).then(async () => {
       if(temp == 200){
         //Call to createPost()
+        console.log("ownername : "  + ownerName)
+        console.log("ownerphone : "  + ownerPhone)
         try {
-          const res = await axios.post("http://127.0.0.1:5002/create",{
+          const res = await axios.post("https://apartmen-ms.onrender.com/aparts/api/create_apartment",{
             whichAction:whichProp,
             userOwnerId:whichProp,
             apType:propType,
@@ -58,7 +65,7 @@ const NewApart = () => {
             builtInMeter:buildInMeter,
             price:propPrice,
             availDate:availDate,
-            apImages:selectedImages,
+            apImages:imgAddress,
             ownerName:ownerName,
             ownerPhone:ownerPhone,
           });
@@ -83,33 +90,65 @@ const NewApart = () => {
     setStage(1)
   };
 
-  const VerifyToken = async () => {
+    const VerifyToken = async () => {
     let tempToken = token ? token : 'a1b2c3d4e5f6f6f65'
     const opts = {
       headers: {
         Authorization: "Bearer " + tempToken,
       },
     };
-    try {
-      const res = await axios.get("http://127.0.0.1:5000/user/verifyToken", opts);
-  
-      if (res.status === 200) {
-        console.log("Test Authorization Success !");
-        return res.status;
-        // Handle the case where the user is authorized
-      } else if (res.status === 422) {
-        console.log("You Are Not Authorized!");
-        return;
-        // Handle the case where the user is not authorized
-      } else {
-        console.log("Unexpected Status Code: " + res.status);
-        // Handle other unexpected status codes
-      }
-    } catch (error) {
-      alert("You Must Login Before Adding a New Post");
-      console.error(error);
+    if(token.length > 17) {
+      console.log("Yes, The length of the token is : " + token.length)
+      return 200;
     }
-  };
+    else{
+      console.log("No, The length of the token is : " + token.length)
+      return 403;
+
+    }
+  }
+
+  const uploadImgToFirebase = () => {
+    if(selectedImages === null) return ;
+
+    const newV4Uuid = v4();
+    console.log("The img uuid is : " + newV4Uuid);
+    setImgAddress(newV4Uuid);
+
+    const imageRef = ref(storage,`images/${newV4Uuid}`);
+    uploadBytes(imageRef,selectedImages).then(() => {
+      alert("Image Upload !")
+    
+    })
+  }
+
+  // const VerifyToken = async () => {
+  //   let tempToken = token ? token : 'a1b2c3d4e5f6f6f65'
+  //   const opts = {
+  //     headers: {
+  //       Authorization: "Bearer " + tempToken,
+  //     },
+  //   };
+  //   try {
+  //     const res = await axios.get("http://127.0.0.1:5000/user/verifyToken", opts);
+  
+  //     if (res.status === 200) {
+  //       console.log("Test Authorization Success !");
+  //       return res.status;
+  //       // Handle the case where the user is authorized
+  //     } else if (res.status === 422) {
+  //       console.log("You Are Not Authorized!");
+  //       return;
+  //       // Handle the case where the user is not authorized
+  //     } else {
+  //       console.log("Unexpected Status Code: " + res.status);
+  //       // Handle other unexpected status codes
+  //     }
+  //   } catch (error) {
+  //     alert("You Must Login Before Adding a New Post");
+  //     console.error(error);
+  //   }
+  // };
 
   const handleCreatePost = async () => {
     let verifyStatusCode = null;
@@ -200,6 +239,47 @@ const NewApart = () => {
     setSelectedImages((prevImages) => [...prevImages, ...imageArray]);
   };
 
+  const convertImageToBase64 = (e) => {
+    console.log(e);
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      console.log(reader.result)
+      // setSelectedImages((prevImages) => [...prevImages, ...reader.result]);
+      setSelectedImages(reader.result)
+    }
+  }
+  // const handleImageUpload = (event) => {
+  //   const files = event.target.files;
+  //   const imageArray = Array.from(files);
+  
+  //   if (imageArray.length === 0) {
+  //     // No valid files selected
+  //     console.error("No files selected.");
+  //     return;
+  //   }
+  
+  //   // Initialize an array to store object URLs
+  //   const objectUrls = [];
+  
+  //   imageArray.forEach((file) => {
+  //     if (file.type.startsWith("image/")) {
+  //       const objectUrl = URL.createObjectURL(file);
+  //       objectUrls.push(objectUrl);
+  //     } else {
+  //       console.warn(`Skipping non-image file: ${file.name}`);
+  //     }
+  //   });
+  
+  //   // Now you can work with the object URLs (e.g., display images or save to state)
+  //   console.log(objectUrls);
+  
+  //   // Don't forget to release the object URLs when you're done with them
+  //   objectUrls.forEach((url) => URL.revokeObjectURL(url));
+  // };
+  
+
+  
   const handleStep3 = (e) => {
     e.preventDefault();
     console.log(
@@ -218,6 +298,7 @@ const NewApart = () => {
   };
   const handleStep4 = (e) => {
     e.preventDefault();
+    uploadImgToFirebase()
     console.log(
       "whichProp : " + parseSelectValue(whichProp),
       "propCity : " +
@@ -486,6 +567,25 @@ const NewApart = () => {
                 />
                 <p>מחיר</p>
               </div>
+              <div className="input-item">
+                <input
+                  className="inputBox"
+                  type="text"
+                  placeholder="שם"
+                  onChange={(e) => setOwnerName(e.target.value)}
+                />
+                <p>שם בעל הנכס</p>
+              </div>
+              <div className="input-item">
+                <input
+                  className="inputBox"
+                  type="text"
+                  placeholder="טלפון"
+                  onChange={(e) => setOwnerPhone(e.target.value)}
+                />
+                <p>טלפון בעל הנכס</p>
+              </div>
+              
               <div className="buttonsCont">
                 <button className="stepBtn" onClick={handleStep3}>
                   הבא
@@ -516,7 +616,7 @@ const NewApart = () => {
                     type="file"
                     accept="image/*"
                     multiple
-                    onChange={handleImageUpload}
+                    onChange={(e) => setSelectedImages(e.target.files[0])}
                     className="imageUpButton"
                   />
                   {/* <p>העלה תמונות</p> */}
@@ -531,15 +631,18 @@ const NewApart = () => {
                 margin: 4,
               }}
             >
-              {selectedImages.map((image, index) => (
+
+              {selectedImages == "" || selectedImages == null ? " " : <img width={100} height={100} src={selectedImages} />}
+              {/* {selectedImages.map((image, index) => (
                 <img
                   key={index}
-                  src={URL.createObjectURL(image)}
+                  src={image}
+                  // src={URL.createObjectURL(image)}
                   alt={`Image ${index + 1}`}
                   width="100"
                   height="100"
                 />
-              ))}
+              ))} */}
             </div>
             <div className="buttonsCont">
               <button className="stepBtn" onClick={handleStep4}>
@@ -587,18 +690,8 @@ const NewApart = () => {
               <strong>מחיר : </strong> {propPrice}
             </p>
             {/* <p><strong>Selected Images:</strong> {selectedImages.map(image => image.name).join(', ')}</p> */}
-            {selectedImages.map((image, index) => (
-              <div key={index} className="imgPrev">
-                <img
-                  src={URL.createObjectURL(image)}
-                  alt={`Selected Image ${index + 1}`}
-                  style={{ maxWidth: "100px", maxHeight: "100px" }} // Adjust the style as needed
-                />
-                {/* <p>
-                  <strong>Image {index + 1}:</strong> {image.name}
-                </p> */}
-              </div>
-            ))}
+            {selectedImages == "" || selectedImages == null ? " " : <img width={100} height={100} src={selectedImages} />}
+
             <button className="stepBtn" onClick={closePopup}>אישור</button>
           </div>
         )}

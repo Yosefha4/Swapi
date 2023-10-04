@@ -9,7 +9,7 @@ const Footer = () => {
         <a style={{textDecoration:"none",color:'inherit'}} href='vehicles' >תקנון</a>
         <a style={{textDecoration:"none",color:'inherit'}} href='vehicles' >צור קשר</a>
         </div>
-      <div className="rightSide">   <h3 style={{margin:'14px 0'}}>-- SWAPI --</h3>
+      <div className="middleSide">   <h3 style={{margin:'14px 0'}}>-- SWAPI --</h3>
         {/* <a style={{textDecoration:"none",color:'inherit'}} href='/realEstate'>נדל"ן</a>
         <a style={{textDecoration:"none",color:'inherit'}}href='vehicles' >רכב</a> */}
         <p>לוח מודעות רכב ונדל"ן </p>

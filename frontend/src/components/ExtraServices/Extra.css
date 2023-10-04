@@ -3,7 +3,7 @@
     justify-content: space-around;
     height: 250px;
     width: 100%;
-    /* background-color: aqua; */
+    background-color: whitesmoke;
 }
 
 .circleContainer{
@@ -42,5 +42,18 @@
 @media (max-width: 400px) {
     .extraContainer{
         margin-top: 226px;
+    }
+}
+@media (max-width: 768px) {
+    .extraContainer{
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        height: 60vh;
+        margin-bottom: 20px;
+    }
+    .circleContainer{
+        border-radius: 8px;
+        width: 50%;
     }
 }

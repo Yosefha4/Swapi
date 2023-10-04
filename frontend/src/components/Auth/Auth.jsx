@@ -32,19 +32,25 @@ const Auth = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://127.0.0.1:5000/user/login", {
+      // const res = await axios.post("http://127.0.0.1:5000/user/login", {
+        console.log("the user email is : " + userEmail)
+        const res = await axios.post("https://auth-node-js-ms.onrender.com/api/auth/signin", {
         email: userEmail,
         password: userPassword,
       });
       // console.log(res)
       if (res.status === 200) {
-        const { access_token } = res.data;
-        localStorage.setItem("access_token", access_token);
+        const { others, token } = res.data;
+        // const { access_token } = res.data;
+        // console.log("access_token:" + token)
+
+        localStorage.setItem("access_token", token);
         localStorage.setItem("user_email", userEmail);
 
-        console.log("the access token is : ", access_token);
+        // console.log("the access token is : ", token);
         navigation("/");
         window.location.reload();
+
         // Cookies.set('access_token', access_token, {httponly: true });
         // console.log("The token saved success on the cookies!")
       }
@@ -55,7 +61,7 @@ const Auth = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://127.0.0.1:5000/user/signup", {
+      const res = await axios.post("https://auth-node-js-ms.onrender.com/api/auth/signup", {
         name: userEmail,
         email: userEmail,
         password: userPassword,

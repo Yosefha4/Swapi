@@ -8,7 +8,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import RealEstate from "./components/RealEstate/RealEstate";
 import Vehicles from "./components/Vehicles/Vehicles";
-import Footer from "./components/Footer/Footer";
 import NewApart from "./components/CreateNewItem/NewApart";
 import NewItemForm from "./components/CreateNewItem/NewItemForm";
 import NewVehicle from "./components/CreateNewItem/NewVehicle";
@@ -29,7 +28,9 @@ function App() {
         <Route path="/createVehicle" element={<NewVehicle/>} />
         <Route path="/newItem" element={<NewItemForm/>} />
       </Routes>
+  
       {/* <Footer /> */}
+       {/* <Footer /> */}
       {/* <Auth/> */}
     </div>
   );

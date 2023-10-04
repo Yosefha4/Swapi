@@ -6,6 +6,8 @@
     box-shadow: 1px 1px 7px black;
     display: flex;
     justify-content: space-around;
+    /* align-items: end; */
+    /* padding: 250px; */
 }
 
 .rightSide{
@@ -14,4 +16,17 @@
     text-align: center;
     gap: 12px;
     color: white;
+}
+.middleSide{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    color: white;
+}
+
+@media (max-width : 768px) {
+    .middleSide{
+        display: none;
+    }
 }
